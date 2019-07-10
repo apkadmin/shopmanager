@@ -1,0 +1,40 @@
+
+<script src="assets/js/core/jquery.min.js"></script>
+<script src="assets/js/core/bootstrap.bundle.min.js"></script>
+<script src="assets/js/core/jquery.slimscroll.min.js"></script>
+<script src="assets/js/core/jquery.scrollLock.min.js"></script>
+<script src="assets/js/core/jquery.appear.min.js"></script>
+<script src="assets/js/core/jquery.countTo.min.js"></script>
+<script src="assets/js/core/js.cookie.min.js"></script>
+<script src="assets/js/base.js"></script>
+
+<!-- Page JS Plugins -->
+<script src="assets/js/plugins/chartjs/Chart.bundle.min.js"></script>
+<!-- Page JS Code -->
+<script src="assets/js/pages/be_pages_dashboard.js"></script>
+<script type="text/javascript">
+$("#update_profile").click(function(){
+    username = $('#side-overlay-profile-name').val();
+    email = $('#side-overlay-profile-email').val();
+    password = $('#side-overlay-profile-password').val();
+    var data = JSON.stringify({
+          "username": username,
+          "password": password,
+          "email": email
+        });
+
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+          if (this.readyState === 4) {
+            console.log(this.responseText);
+          }
+        });
+
+        xhr.open("POST", "http://localhost:3000/update_profile");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("_id", "<%= id%>");
+        xhr.send(data);
+    });
+</script>

@@ -1,0 +1,106 @@
+<!doctype html>
+<!--[if lte IE 9]>     <html lang="en" class="no-focus lt-ie10 lt-ie10-msg"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en" class="no-focus"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+        <title>Danh sách</title>
+
+        <link rel="shortcut icon" href="assets/img/favicons/favicon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicons/favicon-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon-180x180.png">
+        <link rel="stylesheet" id="css-main" href="assets/css/base.min.css">
+    </head>
+    <body>
+        <div id="page-container" class="side-trans-enabled sidebar-o side-scroll">
+            <% include component/side.html %>
+            <% include component/navbar.html %>
+            <% include component/header.html %>
+            <!-- Main Container -->
+            <main id="main-container">
+                <!-- Page Content -->
+                <div class="content">
+				<!-- END Page Content -->
+                    <!-- Latest Orders and Top Products -->
+                    <div class="row gutters-tiny">
+                        <!-- Latest Orders -->
+                        <div class="col-xl-12">
+                            <h2 class="content-heading">Danh sách</h2>
+                            <div class="block block-rounded">
+                                <div class="block-content">
+                                    <table class="table table-borderless table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 100px;" class="text-center">ID</th>
+                                                <th class="text-center">Tên shop</th>
+                                                <th class="d-none d-sm-table-cell text-center">Ngày tạo</th>
+                                                <th class="d-sm-table-cell text-center">Xóa</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           <% list.forEach(function(item){%>
+
+                                           <tr>
+                                           		<td class="text-center"><a onclick="showModal('<%=item._id %>')"><%=item._id %></a></td>
+                                           		<td class="text-center"><%=item.name %></td>
+                                           		<td class="text-center"><a onclick="delete_shop('<%=item._id %>')"><i class="fa fa-delete"></a></td>
+                                           </tr>
+                                           <% }) %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END Latest Orders -->                   
+                    </div>
+                    <!-- END Latest Orders and Top Products -->
+                </div>
+                <!-- END Page Content -->
+            </main>
+            <!-- END Main Container -->
+  
+        <!-- Slide Up Modal -->
+        <div class="modal fade" id="modal-slideup" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
+        	<input type="hidden" id="index_item" name="index">
+            <div class="modal-dialog modal-dialog-slideup" role="document">
+                <div class="modal-content">
+                    <div class="block block-themed block-transparent mb-0">
+                        <div class="block-header bg-primary-dark">
+                            <h3 class="block-title" id="title"></h3>
+                            <div class="block-options">
+                                <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                    <i class="si si-close"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="block-content" id="content">
+                           
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-alt-success" data-dismiss="modal">
+                            <i class="fa fa-check"></i> Perfect
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Slide Up Modal -->
+            <% include component/footer.html %>
+        </div>
+        <!-- END Page Container -->
+         <% include component/script_footer.html %>
+         <script type="text/javascript">
+         	function showModal(id){
+         		$.get("http://localhost:3000/item",{id:id},(data)=>{
+         			$("#title").text(data.name);
+         			$("#content").text(data.description);
+         		});
+				jQuery('#modal-slideup').modal('show');
+         	}
+         </script>
+
+    </body>
+</html>

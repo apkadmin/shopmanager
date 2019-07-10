@@ -1,0 +1,61 @@
+<!doctype html>
+<!--[if lte IE 9]>     <html lang="en" class="no-focus lt-ie10 lt-ie10-msg"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en" class="no-focus"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+        <title>Profile</title>
+        <!-- Icons -->
+        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+        <link rel="shortcut icon" href="assets/img/favicons/favicon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicons/favicon-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon-180x180.png">
+        <!-- END Icons -->
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" id="css-main" href="assets/css/base.min.css">
+
+        <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+        <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
+        <!-- END Stylesheets -->
+    </head>
+    <body>
+        <div id="page-container" class="sidebar-o side-scroll main-content-boxed">
+            <% include component/side.html %>
+            <% include component/navbar.html %>
+            <% include component/header.html %>
+
+
+            <!-- Main Container -->
+            <main id="main-container">
+                <!-- Page Content -->
+                <!-- User Info -->
+                <div class="bg-image bg-image-bottom" style="background-image: url('assets/img/photos/photo13@2x.jpg');">
+                    <div class="bg-primary-dark-op py-30">
+                        <div class="content content-full text-center">
+                            <!-- Avatar -->
+                            <div class="mb-15">
+                                <a class="img-link" href="#">
+                                    <img class="img-avatar img-avatar96 img-avatar-thumb" src="assets/img/avatars/avatar15.jpg" alt="">
+                                </a>
+                            </div>
+                            <!-- END Avatar -->
+
+                            <!-- Personal -->
+                            <h1 class="h3 text-white font-w700 mb-10"><%=username%></h1>
+                            <h2 class="h5 text-white-op">
+                               <%=shop%>
+                            </h2>
+                            <!-- END Personal -->
+                        </div>
+                    </div>
+                </div>
+                <!-- END User Info -->
+
+      <% include component/footer.html %>
+        </div>
+        <!-- END Page Container -->
+   <% include component/script_footer.html %>
+    </body>
+</html>

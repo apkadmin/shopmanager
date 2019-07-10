@@ -1,0 +1,400 @@
+  <!doctype html>
+<!--[if lte IE 9]>     <html lang="en" class="no-focus lt-ie10 lt-ie10-msg"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en" class="no-focus"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+        <title>Thêm sản phẩm</title>
+        <link rel="shortcut icon" href="assets/img/favicons/favicon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicons/favicon-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon-180x180.png">
+        <!-- END Icons -->
+
+        <!-- Stylesheets -->
+        <!-- Page JS Plugins CSS -->
+        <link rel="stylesheet" href="assets/js/plugins/select2/select2.min.css">
+        <link rel="stylesheet" href="assets/js/plugins/select2/select2-bootstrap.min.css">
+        <link rel="stylesheet" href="assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.css">
+        <link rel="stylesheet" href="assets/js/plugins/dropzonejs/min/dropzone.min.css">
+
+        <link rel="stylesheet" id="css-main" href="assets/css/base.min.css">
+    </head>
+    <body>
+        <div id="page-container" class="side-trans-enabled sidebar-o side-scroll">
+            <% include component/side.html %>
+            <% include component/navbar.html %>
+            <% include component/header.html %>
+            <!-- Main Container -->
+            <main id="main-container">
+                <!-- Page Content -->
+                <div class="content">
+                    <!-- Update Product -->
+                    <h2 class="content-heading">Thêm mới</h2>
+                    <div class="row gutters-tiny">
+                        <!-- Basic Info -->
+                        <div class="col-md-7">
+                            <form action="" method="post" onsubmit="return false;">
+                                <input type="hidden" name="" id="product-id" value="<%=list._id%>">
+                                <div class="block block-rounded block-themed">
+                                    <div class="block-header bg-gd-primary">
+                                        <h3 class="block-title">Thông tin cơ bản</h3>
+                                        <div class="block-options">
+                                            <button class="btn btn-danger" id="delete">
+                                                <i class="fa fa-save mr-5"></i>Xóa
+                                            </button>
+                                        </div>
+                                        <div class="block-options">
+                                            <button class="btn btn-sm btn-alt-primary" id="save">
+                                                <i class="fa fa-save mr-5"></i>Cập nhật!
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="block-content block-content-full">
+                                        <div class="form-group row">
+                                            <label class="col-12" for="product-name">Tên mặt hàng <span style="color: red">*</span></label>
+                                            <div class="col-12">
+                                                <input require="require" type="text" class="form-control" id="product-name" name="product-name" placeholder="Product Name" value="<%=list.name%>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-12" for="product-type">Danh mục <span style="color: red">*</span></label>
+                                            <div class="col-12">
+                                                <select class="js-select2 form-control" id="product-type" name="product-type" style="width: 100%;" data-placeholder="Choose one..">
+                                                    <option></option>
+                                                    <% if(list.type=="Điện thoại"){ %>
+                                                    <option value="1" selected>Điện thoại</option>
+                                                    <% } else {%>
+                                                    <option value="1">Điện thoại</option>
+                                                    <% } %>
+                                                     <% if(list.type=="Máy tính"){ %>
+                                                    <option value="2" selected>Máy tính</option>
+                                                     <% } else {%>
+                                                    <option value="2">Máy tính</option>
+                                                    <% } %>
+                                                     <% if(list.type=="Máy in"){ %>
+                                                    <option value="3" selected>Máy in</option>
+                                                     <% } else {%>
+                                                    <option value="3">Máy in</option>
+                                                    <% } %>
+                                                      <% if(list.type=="Quần áo"){ %>
+                                                    <option value="4" selected>Quần áo</option>
+                                                    <% } else {%>
+                                                    <option value="4">Quần áo</option>
+                                                    <% } %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-12">Mô tả <span style="color: red">*</span></label>
+                                            <div class="col-12">
+                                                <textarea class="form-control" id="js-ckeditor" name="js-ckeditor" placeholder="Description" rows="8"><%=list.description%></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-12" for="product-stock">Số lượng <span style="color: red">*</span></label>
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="fa fa-fw fa-archive"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input require="require" type="text" class="form-control" id="product-stock" name="product-stock" placeholder="0" value="<%=list.stock%>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-12" for="product-price">Giá thực tế <span style="color: red">*</span></label>
+                                            <div class="col-sm-12 row">
+                                                <div class="input-group col-sm-6">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="fa fa-fw fa-usd"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input require="require" type="text" class="form-control" id="product-price" name="product-price" placeholder="Price ..." value="<%=list.price%>">
+                                                </div>
+                                                <div class="input-group col-sm-6">
+                                                    <select class="js-select2 form-control" id="unit_price" name="unit_price" style="width: 100%;" data-placeholder="Choose one..">
+                                                        <option></option>
+                                                        <option value="1" selected>VNĐ</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-12" for="product-voucher">Giảm giá</label>
+                                            <div class="col-sm-12 row">
+                                                <div class="input-group col-sm-6">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="fa fa-fw fa-percent"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input require="require" type="number" class="form-control" id="product-voucher" name="product-voucher" placeholder="Percent .." value="<%=list.voucher%>" min="0" max="100">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                 <label class="col-6">Bắt đầu</label>
+                                            <div class="input-group-prepend">
+                                                <div class="input-group col-sm-6">
+                                                    <input require="require" type="date" name="startat" id="startat" placeholder="m-d-YY" value="<%=list.start_voucher%>">
+                                                </div>
+                                            </div>    
+                                            </div>
+                                            <div class="form-group">
+                                                 <label class="col-6">kết thúc</label>
+                                            <div class="input-group-prepend">
+                                                <div class="input-group col-sm-6">
+                                                    <input require="require" type="date" name="startat" value="<%=list.stop_voucher%>" id="stopat" placeholder="m-d-YY">
+                                                </div>
+                                            </div>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <form action="" method="post" onsubmit="return false;">
+                            <div class="block block-rounded block-themed">
+                                <div class="block-header bg-gd-primary">
+                                    <h3 class="block-title">Thông tin nâng cao</h3>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label class="col-12">Màu sắc <span style="color: red">*</span></label>
+                                        <div class="col-12">
+                                            <input require="require" type="text" name="color" id ="product-color" class="form-control" placeholder="black" value="<%=list.color%>">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="col-12">kích cỡ <span style="color: red">*</span></label>
+                                        <div class="col-12">
+                                            <input require="require" type="size" name="size" id="product-size" class="form-control" placeholder="inch" value="<%=list.size%>">
+                                        </div>
+                                    </div>    
+                              
+                                </div>
+                            </div>
+
+                        </form>
+                        </div>
+                        <!-- END Basic Info -->
+                        <!-- More Options -->
+                        <div class="col-md-5">
+                            <!-- Status -->
+                            <form action="" method="post" onsubmit="return false;">
+                                <div class="block block-rounded block-themed">
+                                    <div class="block-header bg-gd-primary">
+                                        <h3 class="block-title">Trạng thái</h3>
+                                    </div>
+                                    <div class="block-content block-content-full">
+                                        <div class="form-group row">
+                                            <label class="col-12">Tình trạng</label>
+                                            <div class="col-12">
+                                                <label class="css-control css-control-primary css-radio">
+                                                    <% if(list.status==false){%>
+                                                    <input require="require" type="radio" class="css-control-input" id="product-condition-new" name="product-condition" checked>
+                                                    <%} else {%>
+                                                     <input require="require" type="radio" class="css-control-input" id="product-condition-new" name="product-condition">
+                                                    <% } %>
+                                                    <span class="css-control-indicator"></span> Mới
+                                                </label>
+
+                                                <label class="css-control css-control-secondary css-radio">
+                                                     <% if(list.status==true){%>
+                                                    <input require="require" type="radio" class="css-control-input" id="product-condition-old" name="product-condition" checked>
+                                                      <%} else {%>
+                                                       <input require="require" type="radio" class="css-control-input" id="product-condition-old" name="product-condition">
+                                                       <% } %>
+                                                    <span class="css-control-indicator"></span> Cũ
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-12">Free ship</label>
+                                            <div class="col-12">
+                                                <label class="css-control css-control-success css-switch">
+                                                      <% if(list.status==true){%>
+                                                    <input require="require" type="checkbox" class="css-control-input" id="product-published" name="product-published" checked>
+                                                      <%} else {%>
+                                                       <input require="require" type="checkbox" class="css-control-input" id="product-published" name="product-published" checked>
+                                                       <% } %>
+                                                    <span class="css-control-indicator"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Bảo hành</label>
+                                            <div class="col-sm-12 row">
+                                               <input require="require" type="text" class="form-control col-sm-8" name="guarantee" placeholder="0" id="guarantee" value="<%=list.guarantee%>"> <span>tháng</span>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- END Status -->
+
+                            <!-- Images -->
+                            <div class="block block-rounded block-themed">
+                                <div class="block-header bg-gd-primary">
+                                    <h3 class="block-title">Hình ảnh <span style="color: red">*</span></h3>
+                                </div>
+
+                                <div class="block-content block-content-full">
+                                    <% for(var i=0; i < list.image.length; i++) { %>
+                                    <div class="row gutters-tiny items-push">
+                                        <div class="col-sm-6 col-xl-4">
+                                            <div class="options-container">
+                                                <img class="img-fluid options-item" src="assets/img/photos/<%= list.image[i] %>" alt="">
+                                                <input type="hidden" name="" class="product-img" value="<%= list.image[i] %>">
+                                                <div class="options-overlay bg-black-op-75">
+                                                    <div class="options-overlay-content">
+                                                        <a class="btn btn-sm btn-rounded btn-alt-danger min-width-75" href="javascript:void(0)" onclick="deleteimg(this)">
+                                                            <i class="fa fa-times"></i> Remove
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                          
+                                        <% } %>
+                                    
+                                    <form class="dropzone" action="/upload-img"></form>
+                                </div>
+                            </div>
+                            <!-- END Images -->
+                        </div>
+                        <!-- END More Options -->
+                    </div>
+                    <!-- END Update Product -->
+                </div>
+                <!-- END Page Content -->
+            </main>
+            <!-- END Main Container -->
+             <% include component/footer.html %>
+        </div>
+        <!-- END Page Container -->
+
+        <script src="assets/js/core/jquery.min.js"></script>
+        <script src="assets/js/core/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/core/jquery.slimscroll.min.js"></script>
+        <script src="assets/js/core/jquery.scrollLock.min.js"></script>
+        <script src="assets/js/core/jquery.appear.min.js"></script>
+        <script src="assets/js/core/jquery.countTo.min.js"></script>
+        <script src="assets/js/core/js.cookie.min.js"></script>
+        <script src="assets/js/base.js"></script>
+
+        <!-- Page JS Plugins -->
+        <script src="assets/js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+        <script src="assets/js/plugins/select2/select2.full.min.js"></script>
+        <script src="assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.js"></script>
+        <script src="assets/js/plugins/dropzonejs/min/dropzone.min.js"></script>
+        <script type="text/javascript">
+            function deleteimg(element){
+                element.parentElement.parentElement.parentElement.parentElement.parentElement.remove()
+            };
+            $("#update_profile").click(function(){
+                username = $('#side-overlay-profile-name').val();
+                email = $('#side-overlay-profile-email').val();
+                password = $('#side-overlay-profile-password').val();
+                var data = JSON.stringify({
+                      "username": username,
+                      "password": password,
+                      "email": email
+                    });
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.withCredentials = true;
+
+                    xhr.addEventListener("readystatechange", function () {
+                      if (this.readyState === 4) {
+                        console.log(this.responseText);
+                      }
+                    });
+
+                    xhr.open("POST", "http://localhost:3000/update_profile");
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.setRequestHeader("_id", "<%= id%>");
+                    xhr.send(data);
+            });
+            $('#save').click(function(){
+                let name = $("#product-name").val();
+                let id = $("#product-id").val();
+                let type = $('#product-type option:selected').text();
+                let description = $('#js-ckeditor').val();
+                let stock = $("#product-stock").val();
+                let price = $('#product-price').val();
+                let voucher = $("#product-voucher").val();
+                let unit = $("#unit_price").val();
+                let start_voucher = $("#startat").val();
+                let stop_voucher = $("#stopat").val();
+                let color = $('#product-color').val();
+                let size =$("#product-size").val();
+                let status = $("#product-condition-old").is(":checked");
+                let freeship = $("#product-published").is(":checked");
+                let guarantee = $("#guarantee").val();
+                let imgs =$(".dz-filename span");
+                let imgs1 =$(".product-img");
+                let img_data = [];
+                for(let i=0;i<imgs.length;i++){img_data.push(imgs[i].textContent)}
+                for(let i=0;i<imgs1.length;i++){img_data.push(imgs1[i].value)}
+                if(name=="" || type=="" ||description=="" || price=="" || img_data.length==0 ) return 0;
+               var data = JSON.stringify({
+                    "id":id,
+                  "name": name,
+                  "type": type,
+                  "description": description,
+                  "stock": parseInt(stock),
+                  "price": price,
+                  "unit_price": unit,
+                  "voucher": voucher,
+                  "start_voucher": start_voucher,
+                  "stop_voucher": stop_voucher,
+                  "color": color,
+                  "size":size,
+                  "status":status,
+                  "freeship": freeship,
+                  "user_id": "<%= id%>",
+                  "image": img_data,
+                  "guarantee":guarantee
+                });
+
+                var xhr = new XMLHttpRequest();
+                xhr.withCredentials = true;
+                xhr.addEventListener("readystatechange", function () {
+                  if (this.readyState === 4) {
+                   alert(this.responseText);
+                  }
+                });
+                xhr.open("POST", "http://localhost:3000/update-item");
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.setRequestHeader("token", "<%= id%>");
+                xhr.send(data);
+            });
+
+        </script>
+          <script type="text/javascript">
+            $("#delete").on('click',function(){
+                let id = $("#product-id").val();;
+                $.post("http://localhost:3000/delete-item",{id:id},(data)=>{
+                    if(data=="1"){
+                        alert("Đã xóa");
+                      window.location.replace("/items");
+                    }
+                });
+            });
+         </script>
+        <!-- Page JS Code -->
+        <script>
+            jQuery(function () {
+                // Init page helpers (BS Maxlength + Select + Tags Inputs plugins)
+                Codebase.helpers([ 'maxlength', 'select2', 'tags-inputs']);
+            });
+        </script>
+    </body>
+</html>
